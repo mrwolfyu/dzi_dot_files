@@ -3,10 +3,10 @@
 set $mod Mod4
 #font pango:monospace 8
 
-font pango:Noto Sans Regular 8
+font pango:Noto Sans Regular 10
 
 workspace_layout default
-new_window pixel 0
+new_window pixel 1
 
 gaps inner 15
 bindsym $mod+m gaps inner all toggle 15
@@ -14,16 +14,19 @@ bindsym $mod+m gaps inner all toggle 15
 floating_modifier $mod
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id picom -b
+#exec --no-startup-id picom -b
+exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
 exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id dex --autostart --environment i3
-#exec --no-startup-id ~/.screenlayout/monitor.sh
 #exec --no-startup-id sleep 2 && nitrogen --restore
 #exec --no-startup-id xset s 480 dpms 600 600 600
 #exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
+
+exec --no-startup-id ~/.config/i3/dziscreenlayout.sh
+bindsym $mod+Shift+m move workspace to output left
 
 
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -33,8 +36,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec terminator
 bindsym $mod+Shift+q kill
-
 
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
@@ -163,16 +166,20 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 assign [class="Xfce4-terminal"] $ws1
-assign [class="Terminator"] $ws1
+assign [class="(?i)x-terminal-emulator"] $ws1
+#assign [class="Terminator"] $ws1
 assign [class="(?i)firefox"] $ws2
 assign [class="Thunar"] $ws3
-assign [class="Thunderbird"] $ws4
+assign [class="(?i)thunderbird"] $ws4
+assign [class="Mail"] $ws4
 assign [class="TelegramDesktop"] $ws5
-for_window [class=Xfce4-terminal] focus
-for_window [class=Terminator] focus
+#for_window [class=Xfce4-terminal] focus
+#for_window [class=(?i)terminator] focus
+for_window [class=(?i)x-terminal-emulator] focus
 for_window [class=(?i)firefox] focus
 for_window [class=Thunar] focus
-for_window [class=Thunderbird] focus
+for_window [class=Mail] focus
+for_window [class=(?i)thunderbird] focus
 for_window [class=TelegramDesktop] focus
 
 for_window [class="Yad" instance="yad"] floating enable
@@ -211,6 +218,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bar {
 	font pango:JetBrains Regular 10, FontAwesome 10
+	#font pango:monospace 10
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         position bottom
         	tray_output primary
