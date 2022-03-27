@@ -24,3 +24,7 @@ Test
 ```bash
 sudo timeshift-autosnap-apt
 ```
+
+Fonts:
+
+https://github.com/be5invis/Iosevka/
