@@ -15,7 +15,8 @@ floating_modifier $mod
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #exec --no-startup-id picom -b
-exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
+exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
+#exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
 exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id dex --autostart --environment i3
