@@ -25,6 +25,13 @@ Test
 sudo timeshift-autosnap-apt
 ```
 
+XFCE windows blinking solution:
+```
+xfconf-query -c xfwm4 -p /general/vblank_mode -t string -s "xpresent" --create
+pkill xfwm
+sudo systemctl restart lightdm
+```
+
 Fonts:
 
 https://github.com/be5invis/Iosevka/
