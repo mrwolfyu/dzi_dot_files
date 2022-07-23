@@ -15,7 +15,7 @@ floating_modifier $mod
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #exec --no-startup-id picom -b
-exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
+exec --no-startup-id picom -b --config ~/.config/i3/picom-new.conf
 exec --no-startup-id /usr/lib/polkit-1/polkitd --no-debug
 
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
