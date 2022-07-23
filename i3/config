@@ -16,17 +16,20 @@ floating_modifier $mod
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #exec --no-startup-id picom -b
 exec --no-startup-id picom -b --config ~/.config/i3/picom.conf
-#exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
-exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-1/polkitd --no-debug
+
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id dex --autostart --environment i3
 #exec --no-startup-id sleep 2 && nitrogen --restore
 #exec --no-startup-id xset s 480 dpms 600 600 600
 #exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+exec --no-startup-id dunst
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 
-exec --no-startup-id ~/.config/i3/dziscreenlayout.sh
+exec --no-startup-id ~/.config/i3/ltscreen.sh
+
 bindsym $mod+Shift+m move workspace to output left
 
 
@@ -217,13 +220,36 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# class                 border  bground text    indicator child_border
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
+
+
 bar {
+colors {
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
+
 	font pango:JetBrains Regular 10, FontAwesome 10
 	#font pango:monospace 10
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         position bottom
-        	tray_output primary
-                tray_padding 0
+        tray_output primary
+        tray_padding 0
 
         #status_command i3status
 }
